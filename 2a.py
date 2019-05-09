@@ -29,10 +29,56 @@ if m == 1:
 	det = mat[0][0]
 
 if m == 2:
-	det = (mat[0][0] * mat[1][1]) - (mat[0][1] * mat[1][0])
+	aux = [1,1]
+	for i in range(m):
+		j = i
+		aux[0] *= mat[i][j]
+	for i in range(m):
+		j = m-i-1
+		aux[1] *= mat[i][j]
+	det = aux[0] - aux[1]
 
 if m == 3:
-	det = (mat[0][0] * mat[1][1] * mat[2][2]) + (mat[0][1] * mat[1][2] * mat[2][0]) + (mat[0][2] * mat[1][0] * mat[2][1]) - (mat[0][2] * mat[1][1] * mat[2][0]) - (mat[0][1] * mat[1][0] * mat[2][2]) - (mat[0][0] * mat[1][2] * mat[2][1])
+	aux = [1,1,1,1,1,1]
+	for i in range(m):
+		j=i
+		aux[0] *= mat[i][j]
+	for i in range(m):
+		j = i + 1
+		if j == 3:
+			j = 0
+		aux[1] *= mat[i][j]
+	for i in range(m):
+		j = m-i*2-1
+		if j == -2:
+			j == 1
+		aux[2] *= mat[i][j]
+	for i in range(m):
+		if i == 0:
+			j = 0
+		else:
+			j = m-i
+		aux[3] *= mat[i][j]
+	for i in range(m):
+		if i == 1:
+			j = i
+		else:
+			j = m-i-1
+		aux[4] *= mat[i][j]
+	for i in range(m):
+		if i == 2:
+			j = i
+		else:
+			j = m-i-2
+		aux[5] *= mat[i][j]
+	det = 0
+	for i in range(6):
+		if i <= 2:
+			det += aux[i]
+		else:
+			det -= aux[i]
+
+
 '''
 --- À fazer ---
 if m == 4:
