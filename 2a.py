@@ -1,34 +1,39 @@
-import numpy as np
 import random
 import os
+import numpy as np
 
-jooj=0
-print('----------------- Determinante da Matriz -----------------')
-
-while True:
-	m = int(input('Insira a ordem da matriz (de 1 à 4)'))
+def criaMatriz():
+	jooj=0
+	print('----------------- Determinante da Matriz -----------------')
+	while True:
+		m = int(input('Insira a ordem da matriz (de 1 à 4)'))
+	
+		if (m>4)or(m<1):
+			jooj+=1
+			os.system('cls' if os.name == 'nt' else 'clear')
+			print('Ordem inválida, digite um número de 1 à 4')
+			if jooj == 2:
+				print('Posso ficar o dia todo nisso, sério.')
+			if jooj > 2:
+				print("I'm a joke to you?...")
+		else:
+			break
+	
 	x = m*m
 	mat = np.arange(x).reshape(m,m)
 
-	if (m>4)or(m<1):
-		jooj+=1
-		os.system('cls' if os.name == 'nt' else 'clear')
-		print('Ordem inválida, digite um número de 1 à 4')
-		if jooj == 2:
-			print('Posso ficar o dia todo nisso, sério.')
-		if jooj > 2:
-			print("I'm a joke to you?...")
-	else:
-		break
+	for i in range(m):
+		for j in range(m):
+	  		mat[i][j] = random.randint(0,9)
 
-for i in range(m):
-	for j in range(m):
-		mat[i][j] = random.randint(0,9)
+	return [mat, m]
 
-if m == 1:
+def m1(mat):
 	det = mat[0][0]
 
-if m == 2:
+	return det
+
+def m2(mat):
 	aux = [1,1]
 	for i in range(m):
 		j = i
@@ -38,7 +43,9 @@ if m == 2:
 		aux[1] *= mat[i][j]
 	det = aux[0] - aux[1]
 
-if m == 3:
+	return det
+
+def m3(mat):
 	aux = [1,1,1,1,1,1]
 	for i in range(m):
 		j=i
@@ -78,16 +85,35 @@ if m == 3:
 		else:
 			det -= aux[i]
 
+	return det
 
-'''
---- À fazer ---
-if m == 4:
+
+# À fazer
+def m4(mat):
 	det=0
 	for k in range(m):
 		for j in range(m):
 			if k!=j:
 				det+=(mat[0][k]*mat[1][j]*mat[2][2]*mat[3][3])
-'''
+	
+	return det
+
+mat, m = criaMatriz()
+
+if m == 1:
+	det = m1(mat)
+
+if m == 2:
+	det = m2(mat)
+
+if m == 3:
+	det = m3(mat)
+
+
+# --- À fazer ---
+if m == 4:
+	det = m4(mat)
+
 for i in range(m):
 	for j in range(m):
 		print(mat[i][j], end=' ')
