@@ -67,16 +67,13 @@ def m3(mat):
 			j = m-i
 		aux[3] *= mat[i][j]
 	for i in range(m):
-		if i == 1:
-			j = i
-		else:
-			j = m-i-1
-		aux[4] *= mat[i][j]
-	for i in range(m):
 		if i == 2:
 			j = i
 		else:
 			j = m-i-2
+		aux[4] *= mat[i][j]
+	for i in range(m):
+		j = m-i-1
 		aux[5] *= mat[i][j]
 	det = 0
 	for i in range(6):
